@@ -1,0 +1,144 @@
+1).Create Counter application using  and Class components.
+display 2 buttons - ++    --
+use state and perform increment and decrement operations using usedefined functions and setState method.
+
+ANS:
+------
+import React, { Component } from 'react';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  decrement = () => {
+    this.setState({ count: this.state.count - 1 });
+  };
+
+  render() {
+    return (
+      <div >
+        <Counter count={this.state.count} increment={this.increment} decrement={this.decrement} />
+      </div>
+    );
+  }
+}
+export default App;
+class Counter extends Component {
+  render() {
+    return (
+      <div className="counter-container">
+        <h1>Counter App</h1>
+        <h2>{this.props.count}</h2>
+        <button onClick={this.props.increment}>++</button><br></br>
+        <button onClick={this.props.decrement}>--</button>
+      </div>
+    );
+  }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2.Create application to display Mobile details, Id,Model,Price details  using  child component ( MobileDetails).
+ANS:
+-----
+import React, { Component } from 'react';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mobiles: [
+        { id: 1, model: 'iPhone', price: 79999 },
+        { id: 2, model: 'Samsung Galaxy S21', price: 69999 },
+        { id: 3, model: 'OnePlus', price: 49999 },
+      ],
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Mobile Details</h1>
+        {this.state.mobiles.map((mobile) => (
+          <MobileDetails key={mobile.id} id={mobile.id} model={mobile.model} price={mobile.price} />
+        ))}
+      </div>
+    );
+  }
+}
+
+class MobileDetails extends Component {
+  render() {
+    return (
+      <div className="mobile-container">
+        <h2>Mobile ID: {this.props.id}</h2>
+        <p>Model: {this.props.model}</p>
+        <p>Price: ₹{this.props.price}</p>
+      </div>
+    );
+  }
+}
+
+export default App;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Create application to send number1,number2 values read from form in  App component  and send to  child Calculator component  and perform sum,diff,product calculations and display  results. 
+
+ANS:
+-----
+import React, { Component } from 'react';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      number1: 0,
+      number2: 0,
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: Number(event.target.value) });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Calculator App</h1>
+        <label>Number 1:</label>
+        <input type="number" name="number1" onChange={this.handleChange} />
+        <br />
+        <label>Number 2:</label>
+        <input type="number" name="number2" onChange={this.handleChange} />
+        <br />
+        <Calculator number1={this.state.number1} number2={this.state.number2} />
+      </div>
+    );
+  }
+}
+
+class Calculator extends Component {
+  render() {
+    const { number1, number2 } = this.props;
+    return (
+      <div className="calculator-container">
+        <h2>Results:</h2>
+        <p>Sum: {number1 + number2}</p>
+        <p>Difference: {number1 - number2}</p>
+        <p>Product: {number1 * number2}</p>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
